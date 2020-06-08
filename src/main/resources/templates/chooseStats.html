@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head th:replace="fragments :: head(#{choose.title})">
+  </head>
+  <body th:replace="fragments :: body(~{::span},~{::script})">
+      <span>
+          <form th:action="@{/result}" method="POST">
+            <h3 th:text="#{choose.headline}"></h3>
+
+            <h4 th:text="#{choose.entries}" class="mt-5">Stats</h4>
+            <div class="form-check" th:each="headline : ${job.headlines}">
+                <input class="form-check-input" type="checkbox" th:value="${headline.name}" name="entry" th:id="${headline.name}" th:checked="${headline.active}">
+                <label class="form-check-label" th:for="${headline.name}" th:text="${headline.name}">Headline</label>
+            </div>
+            <div>
+              <a href="#" id="checkAll" th:text="#{choose.checkAll}"></a> &nbsp;
+              <a href="#" id="uncheckAll" th:text="#{choose.uncheckAll}"></a>
+            </div>
+
+            <h4 th:text="#{choose.player}"  class="mt-5">Player</h4>
+            <div class="form-row form-check" th:each="player : ${job.player}">
+              <div class="col">
+                <input class="form-check-input" type="checkbox" th:value="${player.name}" name="player" th:id="${player.name}" checked>
+              </div>
+              <div class="col">
+                <input class="form-control form-control-sm" type="text" th:value="${player.displayName}" th:name="${player.name}" style="width:300px;">
+              </div>
+            </div>
+            <div>
+              <a href="#" id="checkAllPlayer" th:text="#{choose.checkAll}"></a> &nbsp;
+              <a href="#" id="uncheckAllPlayer" th:text="#{choose.uncheckAll}"></a>
+            </div>
+
+            <div class="form-group col-md-4 mt-5">
+              <label for="style" th:text="#{choose.style}">Style</label>
+              <select id="style" class="form-control" name="style">
+                <option th:each="style : ${T(de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter.ConvertStyleTypes).values()}" th:value="${style}" th:text="#{'choose.style.' + ${style}}"></option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-2" th:text="#{choose.submit}">Submit</button>
+
+          </form>
+      </span>
+
+      <script>
+        $("#checkAll").click(function(e){
+            e.preventDefault();
+            $("input[name='entry']").prop('checked', true);
+        });
+
+        $("#uncheckAll").click(function(e){
+            e.preventDefault();
+            $("input[name='entry']").prop('checked', false);
+        });
+
+        $("#checkAllPlayer").click(function(e){
+            e.preventDefault();
+            $("input[name='player']").prop('checked', true);
+        });
+
+        $("#uncheckAllPlayer").click(function(e){
+            e.preventDefault();
+            $("input[name='player']").prop('checked', false);
+        });
+      </script>
+
+  </body>
+</html>

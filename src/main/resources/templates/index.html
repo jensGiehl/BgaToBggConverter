@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head th:replace="fragments :: head(#{index.title})">
+  </head>
+  <body th:replace="fragments :: body(~{::span},_)">
+      <span>
+        <h3 th:text="#{index.headline}">A Converter</h3>
+        <p th:text="#{index.summary}">
+          A BGA to BGG converter
+        </p>
+
+        <form method="POST" th:action="@{/convert}">
+
+          <div class="form-group">
+              <label for="toConvert" th:text="#{index.toConvert}">BGA statistic</label>
+              <textarea class="form-control" id="toConvert" name="toConvert" rows="10" autofocus></textarea>
+          </div>
+  
+          <button type="submit" class="btn btn-primary mb-2" th:text="#{index.convert}">Convert</button>
+  
+        </form>
+      </span>
+  </body>
+</html>

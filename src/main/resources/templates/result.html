@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head th:replace="fragments :: head(#{result.title})">
+  </head>
+  <body th:replace="fragments :: body(~{::span}, ~{::script})">
+      <span>
+        <h3 th:text="#{result.headline}">Finish</h3>
+       
+        <div class="input-group mb-3">
+            <textarea class="form-control" rows="10" aria-describedby="copyButton" id="result" readonly th:text="${result}"></textarea>
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" id="copyButton" autofocus th:text="#{result.copy}">Copy</button>
+            </div>
+        </div>
+        
+        <a class="btn btn-primary mb-2" th:text="#{result.back}" th:href="@{/}">Back</a>
+        
+      </span>
+
+      <script>
+        $(document).delegate('#copyButton', 'click', function(e) {
+          var copyText = $('#result');
+
+          copyText.select();
+
+          document.execCommand("copy");
+        });
+    </script>
+
+  </body>
+</html>
