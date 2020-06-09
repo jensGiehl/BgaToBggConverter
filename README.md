@@ -20,16 +20,17 @@ playername.mapping.NameB=Laura
 
 The naming convention is `playername.mapping.` followed by the BGA username you want to map.
 
+:exclamation: The BGA username is case sensitiv.
 
 ### Default statistics
-You usually want to have the same statistical values? Then you can store them in the file `classpath:defaultStatisticOptions.properties`.
+You usually want to have the same statistical values? Then you can provide the `statistic.default.enabled` configuration with comma separated statistic names. 
 
-Here is an example:
+Example:
 ```
-statistic.default.enabled[0]=Score
-statistic.default.enabled[1]=Time for consideration
+ statistic.default.enabled=Score,Time for consideration
 ```
 
+:exclamation: The BGA username is case sensitiv.
 
 
 ### General configuration
