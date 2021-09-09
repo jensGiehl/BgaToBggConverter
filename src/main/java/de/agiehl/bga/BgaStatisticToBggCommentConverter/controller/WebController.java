@@ -23,49 +23,47 @@ import de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter.Convert
 @Controller
 public class WebController {
 
-    @Autowired
-    private ParseBgaStringService parseService;
+	@Autowired
+	private ParseBgaStringService parseService;
 
-    @Autowired
-    private ConverterService converterService;
+	@Autowired
+	private ConverterService converterService;
 
-    @Autowired
-    private Environment env;
+	@Autowired
+	private Environment env;
 
-    @GetMapping(path = "/")
-    public String index() {
-        return "index";
-    }
+	@GetMapping(path = "/")
+	public String index() {
+		return "index";
+	}
 
-    @PostMapping(path = "/convert")
-    public String convert(@RequestParam(value = "toConvert") String statisticToConvert, Model model, HttpSession session) {
-        ConverterJob converterJob = parseService.convert(statisticToConvert);
+	@PostMapping(path = "/convert")
+	public String convert(@RequestParam(value = "toConvert") String statisticToConvert, Model model,
+			HttpSession session) {
+		ConverterJob converterJob = parseService.convert(statisticToConvert);
 
-        model.addAttribute("job", converterJob);
-        session.setAttribute("job", converterJob);
+		model.addAttribute("job", converterJob);
+		model.addAttribute("style", ConvertStyleTypes.BGG_STYLE.name());
+		session.setAttribute("job", converterJob);
 
-        env.getProperty("statistic.default.enabled", List.class);
+		env.getProperty("statistic.default.enabled", List.class);
 
-        return "chooseStats";
-    }
+		return "chooseStats";
+	}
 
-    @PostMapping(path="/result")
-    public String result(
-        @RequestParam(value="entry") List<String> choosenStats, 
-        @RequestParam(value="player") List<String> choosenPlayer,
-        @RequestParam(value="style") ConvertStyleTypes style,
-        @RequestParam Map<String, String> allValues,
-        @SessionAttribute(name = "job") ConverterJob job,
-        Locale locale,
-        Model model) {
+	@PostMapping(path = "/result")
+	public String result(@RequestParam(value = "entry") List<String> choosenStats,
+			@RequestParam(value = "player") List<String> choosenPlayer,
+			@RequestParam(value = "style") ConvertStyleTypes style, @RequestParam Map<String, String> allValues,
+			@SessionAttribute(name = "job") ConverterJob job, Locale locale, Model model) {
 
-            job.getPlayer().forEach(player -> player.setDisplayName(allValues.get(player.getName())));
-            
-            String convertedString = converterService.convert(job, style, choosenStats, choosenPlayer, locale);
+		job.getPlayer().forEach(player -> player.setDisplayName(allValues.get(player.getName())));
 
-            model.addAttribute("result", convertedString);
+		String convertedString = converterService.convert(job, style, choosenStats, choosenPlayer, locale);
 
-            return "result";
-    }
-    
+		model.addAttribute("result", convertedString);
+
+		return "result";
+	}
+
 }

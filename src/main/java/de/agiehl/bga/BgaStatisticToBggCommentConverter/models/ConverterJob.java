@@ -8,8 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ConverterJob {
-    private List<Player> player;
+	private List<Player> player;
 
-    private List<Headline> headlines;
-
+	private List<Headline> headlines;
 }

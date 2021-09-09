@@ -33,8 +33,8 @@
 
             <div class="form-group col-md-4 mt-5">
               <label for="style" th:text="#{choose.style}">Style</label>
-              <select id="style" class="form-control" name="style">
-                <option th:each="style : ${T(de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter.ConvertStyleTypes).values()}" th:value="${style}" th:text="#{'choose.style.' + ${style}}"></option>
+              <select id="style" class="form-control" name="style" th:value="${style}">
+                <option th:each="s : ${T(de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter.ConvertStyleTypes).values()}" th:value="${s}" th:text="#{'choose.style.' + ${s}}" th:selected="${#strings.equals(s, style)}"></option>
               </select>
             </div>
 

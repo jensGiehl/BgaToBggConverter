@@ -1,5 +1,6 @@
 package de.agiehl.bga.BgaStatisticToBggCommentConverter.service;
 
+import static de.agiehl.bga.BgaStatisticToBggCommentConverter.service.IsEmpty.isNotEmpty;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
@@ -17,25 +18,28 @@ import de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter.Convert
 @Service
 public class ConverterService {
 
-    @Autowired
-    private MessageSource msg;
+	@Autowired
+	private MessageSource msg;
 
-    public String convert(ConverterJob job, ConvertStyleTypes style, List<String> choosenStats,
-            List<String> choosenPlayer, Locale locale) {
+	public String convert(ConverterJob job, ConvertStyleTypes style, List<String> choosenStats,
+			List<String> choosenPlayer, Locale locale) {
 
-        List<Player> players = job.getPlayer().stream().filter(player -> choosenPlayer.contains(player.getName())).collect(toList());
+		List<Player> players = job.getPlayer().stream().filter(player -> choosenPlayer.contains(player.getName()))
+				.collect(toList());
 
-        for (Player player : players) {
-            for (PlayerStatisticValue value : player.getValues()) {
-                if (choosenStats.contains(value.getKey())) {
-                    value.setActive(true);
-                } else {
-                    value.setActive(false);
-                }
-            }
-        }
+		for (Player player : players) {
+			for (PlayerStatisticValue value : player.getValues()) {
+				if (choosenStats.contains(value.getKey()) && isNotEmpty(value.getValue())) {
+					value.setActive(true);
+				} else {
+					value.setActive(false);
+				}
+			}
+		}
 
-        return msg.getMessage("playedOn.text", null, locale) + "\n\n" +  style.getConverter().convert(players);
-    }
-    
+		String infoText = msg.getMessage("playedOn.text", null, locale);
+
+		return style.getConverter().convert(job, players, infoText);
+	}
+
 }
