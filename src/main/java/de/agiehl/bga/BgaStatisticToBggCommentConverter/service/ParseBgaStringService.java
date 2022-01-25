@@ -26,23 +26,23 @@ public class ParseBgaStringService {
 	@Autowired
 	private MessageSource msg;
 
-	private static final String lineSeparator = "\\r?\\n";
+	private static final String lineSeparatorRegex = "\\r?\\n";
 
-	private static final String rowSeparator = "\\t";
+	private static final String rowSeparatorRegex = "\\t";
 
 	public ConverterJob convert(@NonNull String raw) {
 		if (!raw.startsWith("\t")) {
 			raw = "\t" + raw;
 		}
 
-		String[] rows = raw.split(lineSeparator);
+		String[] rows = raw.split(lineSeparatorRegex);
 
-		List<Player> players = asList(rows[0].split(rowSeparator)).stream().skip(1).map(String::trim).map(Player::new)
-				.collect(toList());
+		List<Player> players = asList(rows[0].split(rowSeparatorRegex)).stream().skip(1).map(String::trim)
+				.map(Player::new).collect(toList());
 		List<Headline> allHeadlines = new ArrayList<>();
 
 		for (int r = 1; r < rows.length; r++) {
-			String[] col = rows[r].split(rowSeparator);
+			String[] col = rows[r].split(rowSeparatorRegex);
 			String headline = col[0].trim();
 
 			boolean isFilled = false;
