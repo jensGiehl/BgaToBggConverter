@@ -1,12 +1,11 @@
 package de.agiehl.bga.BgaStatisticToBggCommentConverter.controller;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.ConverterJob;
+import de.agiehl.bga.BgaStatisticToBggCommentConverter.service.ConverterService;
+import de.agiehl.bga.BgaStatisticToBggCommentConverter.service.ParseBgaStringService;
+import de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter.ConvertStyleTypes;
+import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,21 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.ConverterJob;
-import de.agiehl.bga.BgaStatisticToBggCommentConverter.service.ConverterService;
-import de.agiehl.bga.BgaStatisticToBggCommentConverter.service.ParseBgaStringService;
-import de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter.ConvertStyleTypes;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @Controller
+@AllArgsConstructor
 public class WebController {
 
-	@Autowired
 	private ParseBgaStringService parseService;
 
-	@Autowired
 	private ConverterService converterService;
 
-	@Autowired
 	private Environment env;
 
 	@GetMapping(path = "/")
