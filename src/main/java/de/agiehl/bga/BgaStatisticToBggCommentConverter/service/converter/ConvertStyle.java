@@ -1,9 +1,9 @@
 package de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter;
 
-import java.util.List;
-
 import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.ConverterJob;
 import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.Player;
+
+import java.util.List;
 
 public interface ConvertStyle {
 

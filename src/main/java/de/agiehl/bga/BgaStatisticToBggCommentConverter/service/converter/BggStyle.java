@@ -1,12 +1,12 @@
 package de.agiehl.bga.BgaStatisticToBggCommentConverter.service.converter;
 
-import static java.util.stream.Collectors.joining;
-
-import java.util.List;
-
 import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.ConverterJob;
 import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.Player;
 import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.PlayerStatisticValue;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.joining;
 
 public class BggStyle implements ConvertStyle {
 
