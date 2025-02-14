@@ -1,29 +1,27 @@
 package de.agiehl.bga.BgaStatisticToBggCommentConverter.service;
 
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.ConverterJob;
+import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.Headline;
+import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.Player;
+import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.env.Environment;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.ConverterJob;
-import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.Headline;
-import de.agiehl.bga.BgaStatisticToBggCommentConverter.models.Player;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 @Service
+@AllArgsConstructor
 public class ParseBgaStringService {
 
-	@Autowired
 	private Environment env;
 
-	@Autowired
 	private MessageSource msg;
 
 	private static final String lineSeparatorRegex = "\\r?\\n";

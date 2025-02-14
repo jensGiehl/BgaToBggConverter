@@ -6,20 +6,18 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version>
+        <version>3.4.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>de.agiehl.bga</groupId>
     <artifactId>BgaStatisticToBggCommentConverter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>BgaStatisticToBggCommentConverter</name>
     <description>Convert the boardgamearena.com statistic into a boardgamegeek.com comment</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>21</java.version>
         <start-class>de.agiehl.bga.BgaStatisticToBggCommentConverter.Application</start-class>
-
-        <versions-rules>file:///${maven.multiModuleProjectDirectory}/maven-version-rules.xml</versions-rules>
     </properties>
 
     <dependencies>
@@ -58,14 +56,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>versions-maven-plugin</artifactId>
-            <version>2.13.0</version>
-            <type>maven-plugin</type>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -76,11 +66,11 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <rulesUri>${versions-rules}</rulesUri>
-                    <generateBackupPoms>false</generateBackupPoms>
+                    <source>21</source>
+                    <target>21</target>
                 </configuration>
             </plugin>
 

@@ -1,13 +1,13 @@
 package de.agiehl.bga.BgaStatisticToBggCommentConverter.models;
 
-import static java.util.Collections.unmodifiableList;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import static java.util.Collections.unmodifiableList;
 
 @Getter
 public class Player {
