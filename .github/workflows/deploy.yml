@@ -67,7 +67,9 @@ jobs:
           script: |
             pkill -f 'BgaStatisticToBggCommentConverter.jar' || true
             
-            sleep 5
+            sleep 10
+
+            java -version
             
             nohup java -jar /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar \
               --spring.config.additional-location=file:/home/${{ secrets.SERVER_USER }}/deploy/defaultPlayernameMapping.properties \
