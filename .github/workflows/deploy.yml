@@ -40,7 +40,7 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           port: 22
           script: |
-            mv /home/${{ secrets.SERVER_USER }}/deploy/*.jar \
+            mv /home/${{ secrets.SERVER_USER }}/deploy/target/*.jar \
                /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar
 
       - name: Create play mapping file
