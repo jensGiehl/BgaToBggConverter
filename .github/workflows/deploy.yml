@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           port: 22
-          source: "target/BgaStatisticToBggCommentConverter-*.jar"
+          source: "target/*.jar"
           target: "/home/${{ secrets.SERVER_USER }}/deploy/"
           
       - name: Rename JAR on server
@@ -40,7 +40,7 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           port: 22
           script: |
-            mv /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter-*.jar \
+            mv /home/${{ secrets.SERVER_USER }}/deploy/*.jar \
                /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar
 
       - name: Create play mapping file
