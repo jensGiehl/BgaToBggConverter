@@ -20,7 +20,7 @@ jobs:
           java-version: '21'
 
       - name: Build with Maven
-        run: mvn clean package
+        run: mvn clean package --no-transfer-progress
 
       - name: Copy artifact to server
         uses: appleboy/scp-action@v0.1.0
@@ -30,7 +30,18 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           port: 22
           source: "target/BgaStatisticToBggCommentConverter-*.jar"
-          target: "/home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar"
+          target: "/home/${{ secrets.SERVER_USER }}/deploy/"
+          
+      - name: Rename JAR on server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: 22
+          script: |
+            mv /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter-*.jar \
+               /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar
 
       - name: Create play mapping file
         run: |
