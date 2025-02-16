@@ -65,14 +65,9 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           port: 22
           script: |
-            java -version
-
-            java -version > /home/${{ secrets.SERVER_USER }}/deploy/java.log
             pkill -f 'BgaStatisticToBggCommentConverter.jar' || true
             
             sleep 10
-
-            java -version
             
             nohup java -jar /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar \
               --spring.config.additional-location=file:/home/${{ secrets.SERVER_USER }}/deploy/defaultPlayernameMapping.properties \
