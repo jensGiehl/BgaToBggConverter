@@ -42,6 +42,7 @@ jobs:
           script: |
             mv /home/${{ secrets.SERVER_USER }}/deploy/target/*.jar \
                /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar
+            rm -rf /home/${{ secrets.SERVER_USER }}/deploy/target
 
       - name: Create play mapping file
         run: |
@@ -69,6 +70,5 @@ jobs:
             
             sleep 10
             
-            nohup java -jar /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar \
-              --spring.config.additional-location=file:/home/${{ secrets.SERVER_USER }}/deploy/defaultPlayernameMapping.properties \
-              > /home/${{ secrets.SERVER_USER }}/deploy/app.log 2>&1 &
+            nohup -o /home/${{ secrets.SERVER_USER }}/deploy/app.log java -jar /home/${{ secrets.SERVER_USER }}/deploy/BgaStatisticToBggCommentConverter.jar \
+              --spring.config.additional-location=file:/home/${{ secrets.SERVER_USER }}/deploy/defaultPlayernameMapping.properties &
